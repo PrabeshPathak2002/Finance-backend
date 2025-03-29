@@ -44,16 +44,5 @@ router.put("/update/:id", async (req, res) => {
     }
   });
 
-  app.post("/add", async (req, res) => {
-    try {
-        const { type, description, amount } = req.body;
-        const newTransaction = new Transaction({ type, description, amount });
-        await newTransaction.save();
-        res.status(201).json(newTransaction);
-    } catch (error) {
-        res.status(500).json({ error: error.message });
-    }
-});
-
 
 module.exports = router;

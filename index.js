@@ -20,6 +20,18 @@ app.get("/", (req, res) => {
   res.send("Finance API is running...");
 });
 
+app.post("/add", async (req, res) => {
+    try {
+        const { type, description, amount } = req.body;
+        const newTransaction = new Transaction({ type, description, amount });
+        await newTransaction.save();
+        res.status(201).json(newTransaction);
+    } catch (error) {
+        res.status(500).json({ error: error.message });
+    }
+});
+
+
 // Start server
 const PORT = process.env.PORT || 5000;
 const transactionRoutes = require("./routes/transactionRoutes");
